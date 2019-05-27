@@ -7,6 +7,8 @@ import { NgxScaleModule } from '../ngx-scale/ngx-scale.module';
 import { SampleRoutingModule } from './sample-routing.module';
 
 import { SampleComponent } from './sample.component';
+import { SampleAutoResizeComponent } from './sample-auto-resize/sample-auto-resize.component';
+import { SampleManuallyResizeComponent } from './sample-manually-resize/sample-manually-resize.component';
 
 
 @NgModule({
@@ -18,6 +20,8 @@ import { SampleComponent } from './sample.component';
   ],
   declarations: [
     SampleComponent,
+    SampleAutoResizeComponent,
+    SampleManuallyResizeComponent,
   ],
 })
 export class SampleModule { }

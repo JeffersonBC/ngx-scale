@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -7,11 +6,4 @@ import { FormGroup, FormControl } from '@angular/forms';
   templateUrl: './sample.component.html',
   styleUrls: ['./sample.component.scss']
 })
-export class SampleComponent {
-
-  form: FormGroup = new FormGroup({
-    width: new FormControl(50),
-    height: new FormControl(250),
-  });
-
-}
+export class SampleComponent { }
