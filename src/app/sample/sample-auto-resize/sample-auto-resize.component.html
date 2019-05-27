@@ -1,0 +1,21 @@
+<div class="w-100 d-flex justify-content-center">
+  <div class="scaler-container mt-5"
+    #scaleContainer=scaleContainerDirective
+    [scaleContainer]="{ width: 500, height: 250 }"
+    [style.width]="'80%'"
+    [style.height.px]="250"
+  >
+    <div class="scaler p-3">
+      <h1>Title</h1>
+      <div class="row">
+        <div class="col-8">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer venenatis massa vitae ultricies molestie.</p>
+        </div>
+
+        <div class="col-4 d-flex justify-content-center align-items-center">
+          <fa-icon icon="award" size="6x" class="mr-2"></fa-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <label for="width">Width: {{ form.value.width }}px</label>
+      <div class="input-group">
+        <input id="width-range"
+          class="form-control"
+          type="range"
+          min="100" max="500"
+          [formControl]="form.get('width')"
+        />
+      </div>
+    </div>
+
+    <div class="col-6">
+      <label for="height">Height: {{ form.value.height }}px</label>
+      <div class="input-group">
+        <input id="height-range"
+          class="form-control"
+          type="range"
+          min="100" max="500"
+          [formControl]="form.get('height')"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="scaler-container mt-5"
+    #scaleContainer=scaleContainerDirective
+    [scaleContainer]="{ width: 500, height: 250, resizeManually: true }"
+    [style.width.px]="form.value.width"
+    [style.height.px]="form.value.height"
+  >
+    <div class="scaler p-3">
+      <h1>Title</h1>
+      <div class="row">
+        <div class="col-8">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer venenatis massa vitae ultricies molestie.</p>
+        </div>
+
+        <div class="col-4 d-flex justify-content-center align-items-center">
+          <fa-icon icon="award" size="6x" class="mr-2"></fa-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
