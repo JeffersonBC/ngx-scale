@@ -1,9 +1,8 @@
 <div class="w-100 d-flex justify-content-center">
-  <div class="scaler-container mt-5"
-    #scaleContainer=scaleContainerDirective
-    [scaleContainer]="{ width: 500, height: 250 }"
+  <div class="scaler-container my-4"
+    [ngxScaleContainer]="{ width: 500, height: 250 }"
     [style.width]="'80%'"
-    [style.height.px]="250"
+    [style.height]="'40vh'"
   >
     <div class="scaler p-3">
       <h1>Title</h1>
