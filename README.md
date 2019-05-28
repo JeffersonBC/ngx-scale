@@ -1,27 +1,72 @@
 # NgxScale
+NgxScale implements an Angular directive to easily scale up/ down HTML elements inside a container, keeping the original aspect ratio.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.2.
+## Demo
+You can find a demo of the directive being used [here](https://jeffersonbc.github.io/ngx-scale). The code for the demo can be found at the project's [repository](https://github.com/JeffersonBC/ngx-scale/tree/master/src/app/sample).
 
-## Development server
+## Installation
+You can add `ngx-scale` to your project using:
+```bash
+$ npm install ngx-scale --save
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Usage
+Import the `NgxScaleModule` in the module you want to use the directive.
 
-## Code scaffolding
+```ts
+import { NgxScaleModule } from  'ngx-scale';
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+@NgModule({
+	imports: [ NgxScaleModule ],
+})
+export class SampleModule { }
+```
 
-## Build
+### Automatically updating the size of the content
+Add the `ngxScaleContainer` directive to the HTML element you want to use as the container that will scale up/ down the content, and bind to it an object with width and height as properties. These properties set the default size for the content to be scaled.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```html
+<div [ngxScaleContainer]="{ width: 500, height: 250 }">
+	<div>
+		<h1>Title</h1>
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+			Integer venenatis massa vitae ultricies molestie.
+		</p>
+	</div>
+</div>
+```
 
-## Running unit tests
+**Only the first child of the container will be scaled up/ down, so for most cases you should wrap the content inside a single HTML tag.*
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Manually updating the size of the content
+For some cases, if the size of the scaling container will change as a result of operations made in the script of a component, there may be a delay between changing the size of the container and the content. In such cases, this can be fixed by manually calling the `updateScale()` function of the directive.
 
-## Running end-to-end tests
+To do so, first add a reference to the directive. It's exported as `ngxScaleContainerDirective`, so you can add a reference to that.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```html
+<div #scaleContainer=ngxScaleContainerDirective
+	[ngxScaleContainer]="{ width: 500, height: 250 }"
+	[style.width.px]="form.value.width"
+	[style.height.px]="form.value.height"
+>
+	<div>...</div>
+</div>
+```
+```ts
+export class SampleManuallyResizeComponent implements OnInit {
+	@ViewChild('scaleContainer') scaleContainer: NgxScaleContainerDirective;
 
-## Further help
+	form: FormGroup = new FormGroup({
+		width: new FormControl(250),
+		height: new FormControl(250),
+	});
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+	ngOnInit() {
+		this.form.valueChanges.subscribe(
+			(changes: { width: number, height: number }) =>
+				this.scaleContainer.updateScale(changes);
+		);
+	}
+}
+```
