@@ -3,12 +3,12 @@ import { Directive, OnInit, Input, ElementRef, Renderer2, AfterViewInit, OnDestr
 import { ResizeSensor } from 'css-element-queries';
 
 @Directive({
-  selector: '[scaleContainer]',
-  exportAs: 'scaleContainerDirective',
+  selector: '[ngxScaleContainer]',
+  exportAs: 'ngxScaleContainerDirective',
 })
-export class ScaleContainerDirective implements OnInit, OnDestroy, AfterViewInit {
+export class NgxScaleContainerDirective implements OnInit, OnDestroy, AfterViewInit {
 
-  @Input() scaleContainer: {
+  @Input() ngxScaleContainer: {
     width: number,
     height: number,
     resizeManually?: boolean,
@@ -23,21 +23,21 @@ export class ScaleContainerDirective implements OnInit, OnDestroy, AfterViewInit
   ) { }
 
   ngOnInit() {
+    if (this.ngxScaleContainer.resizeManually !== true) {
+      this._resizeSensor = new ResizeSensor(this.element.nativeElement, () => this.updateScale());
+    }
+
     this.renderer.setStyle(
       this.element.nativeElement.children[0],
       'width',
-      `${this.scaleContainer.width}px`,
+      `${this.ngxScaleContainer.width}px`,
     );
 
     this.renderer.setStyle(
       this.element.nativeElement.children[0],
       'height',
-      `${this.scaleContainer.height}px`,
+      `${this.ngxScaleContainer.height}px`,
     );
-
-    if (this.scaleContainer.resizeManually !== true) {
-      this._resizeSensor = new ResizeSensor(this.element.nativeElement, () => this.updateScale());
-    }
   }
 
   ngOnDestroy() {
@@ -53,8 +53,8 @@ export class ScaleContainerDirective implements OnInit, OnDestroy, AfterViewInit
   public updateScale(scale: { width?: number, height?: number } = {}) {
     // Calculates the scale of the internal element
     const calculatedScale = Math.min(
-      (scale.width  || this.element.nativeElement.offsetWidth)  / Math.max(this.scaleContainer.width , 1),
-      (scale.height || this.element.nativeElement.offsetHeight) / Math.max(this.scaleContainer.height, 1),
+      (scale.width  || this.element.nativeElement.offsetWidth)  / Math.max(this.ngxScaleContainer.width , 1),
+      (scale.height || this.element.nativeElement.offsetHeight) / Math.max(this.ngxScaleContainer.height, 1),
     );
 
     this.renderer.setStyle(
@@ -69,17 +69,17 @@ export class ScaleContainerDirective implements OnInit, OnDestroy, AfterViewInit
 
     // Calculates the padding of the container
     const heightThreshold =
-      ((scale.width  || this.element.nativeElement.offsetWidth) * this.scaleContainer.height) / this.scaleContainer.width;
+      ((scale.width  || this.element.nativeElement.offsetWidth) * this.ngxScaleContainer.height) / this.ngxScaleContainer.width;
 
     let paddingTop = 0;
     let paddingLeft = 0;
 
     (scale.height || this.element.nativeElement.offsetHeight) > heightThreshold
       ? paddingTop  = Math.floor(((scale.height || this.element.nativeElement.offsetHeight)
-        - this.scaleContainer.height * calculatedScale) / 2)
+        - this.ngxScaleContainer.height * calculatedScale) / 2)
 
       : paddingLeft = Math.floor(((scale.width  || this.element.nativeElement.offsetWidth)
-        - this.scaleContainer.width  * calculatedScale) / 2);
+        - this.ngxScaleContainer.width  * calculatedScale) / 2);
 
     this.renderer.setStyle(this.element.nativeElement, 'padding-top' , `${paddingTop }px`);
     this.renderer.setStyle(this.element.nativeElement, 'padding-left', `${paddingLeft}px`);

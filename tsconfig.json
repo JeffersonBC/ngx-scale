@@ -16,6 +16,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngxScale": [
+        "dist/ngx-scale"
+      ],
+      "ngxScale/*": [
+        "dist/ngx-scale/*"
+      ]
+    }
   }
 }

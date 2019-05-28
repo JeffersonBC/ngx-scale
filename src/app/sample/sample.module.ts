@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { NgxScaleModule } from '../ngx-scale/ngx-scale.module';
+import { NgxScaleModule } from 'projects/ngx-scale/src/public_api';
 
 import { SampleRoutingModule } from './sample-routing.module';
 

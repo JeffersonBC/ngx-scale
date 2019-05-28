@@ -127,6 +127,41 @@
           }
         }
       }
+    },
+    "ngxScale": {
+      "root": "projects/ngx-scale",
+      "sourceRoot": "projects/ngx-scale/src",
+      "projectType": "library",
+      "prefix": "ngxScale",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-scale/tsconfig.lib.json",
+            "project": "projects/ngx-scale/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-scale/src/test.ts",
+            "tsConfig": "projects/ngx-scale/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-scale/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-scale/tsconfig.lib.json",
+              "projects/ngx-scale/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-scale"

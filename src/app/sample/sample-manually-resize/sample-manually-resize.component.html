@@ -25,9 +25,9 @@
     </div>
   </div>
 
-  <div class="scaler-container mt-5"
-    #scaleContainer=scaleContainerDirective
-    [scaleContainer]="{ width: 500, height: 250, resizeManually: true }"
+  <div class="scaler-container my-4"
+    #scaleContainer=ngxScaleContainerDirective
+    [ngxScaleContainer]="{ width: 500, height: 250, resizeManually: true }"
     [style.width.px]="form.value.width"
     [style.height.px]="form.value.height"
   >

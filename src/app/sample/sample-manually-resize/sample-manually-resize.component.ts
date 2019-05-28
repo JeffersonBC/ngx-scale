@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
-import { ScaleContainerDirective } from '../../ngx-scale/scale-container.directive';
+import { NgxScaleContainerDirective } from 'projects/ngx-scale/src/lib/ngx-scale-container.directive';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { ScaleContainerDirective } from '../../ngx-scale/scale-container.directi
 })
 export class SampleManuallyResizeComponent implements OnInit {
 
-  @ViewChild('scaleContainer') scaleContainer: ScaleContainerDirective;
+  @ViewChild('scaleContainer') scaleContainer: NgxScaleContainerDirective;
 
   form: FormGroup = new FormGroup({
     width: new FormControl(250),
@@ -20,7 +20,7 @@ export class SampleManuallyResizeComponent implements OnInit {
 
   ngOnInit() {
     this.form.valueChanges.subscribe((changes: { width: number, height: number }) => {
-      this.scaleContainer.updateScale({ width: changes.width, height: changes.height });
+      this.scaleContainer.updateScale(changes);
     });
   }
 
