@@ -14,10 +14,10 @@ $ npm install ngx-scale --save
 Import the `NgxScaleModule` in the module you want to use the directive.
 
 ```ts
-import { NgxScaleModule } from  'ngx-scale';
+import { NgxScaleModule } from 'ngx-scale';
 
 @NgModule({
-	imports: [ NgxScaleModule ],
+  imports: [ NgxScaleModule ],
 })
 export class SampleModule { }
 ```
@@ -27,13 +27,13 @@ Add the `ngxScaleContainer` directive to the HTML element you want to use as the
 
 ```html
 <div [ngxScaleContainer]="{ width: 500, height: 250 }">
-	<div>
-		<h1>Title</h1>
-		<p>
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-			Integer venenatis massa vitae ultricies molestie.
-		</p>
-	</div>
+  <div>
+    <h1>Title</h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Integer venenatis massa vitae ultricies molestie.
+    </p>
+  </div>
 </div>
 ```
 
@@ -42,31 +42,31 @@ Add the `ngxScaleContainer` directive to the HTML element you want to use as the
 ### Manually updating the size of the content
 For some cases, if the size of the scaling container will change as a result of operations made in the script of a component, there may be a delay between changing the size of the container and the content. In such cases, this can be fixed by manually calling the `updateScale()` function of the directive.
 
-To do so, first add a reference to the directive. It's exported as `ngxScaleContainerDirective`, so you can add a reference to that.
+To do so, first add a reference to the directive. It's exported as `ngxScaleContainerDirective`, so you can add a reference to that. Add a property `resizeManually: true` to the object bound to `ngxScaleContainer`.
 
 ```html
 <div #scaleContainer=ngxScaleContainerDirective
-	[ngxScaleContainer]="{ width: 500, height: 250 }"
-	[style.width.px]="form.value.width"
-	[style.height.px]="form.value.height"
+  [ngxScaleContainer]="{ width: 500, height: 250, resizeManually: true }"
+  [style.width.px]="form.value.width"
+  [style.height.px]="form.value.height"
 >
-	<div>...</div>
+  <div>...</div>
 </div>
 ```
 ```ts
 export class SampleManuallyResizeComponent implements OnInit {
-	@ViewChild('scaleContainer') scaleContainer: NgxScaleContainerDirective;
+  @ViewChild('scaleContainer') scaleContainer: NgxScaleContainerDirective;
 
-	form: FormGroup = new FormGroup({
-		width: new FormControl(250),
-		height: new FormControl(250),
-	});
+  form: FormGroup = new FormGroup({
+    width: new FormControl(250),
+    height: new FormControl(250),
+  });
 
-	ngOnInit() {
-		this.form.valueChanges.subscribe(
-			(changes: { width: number, height: number }) =>
-				this.scaleContainer.updateScale(changes);
-		);
-	}
+  ngOnInit() {
+    this.form.valueChanges.subscribe(
+      (changes: { width: number, height: number }) =>
+        this.scaleContainer.updateScale(changes)
+    );
+  }
 }
 ```

@@ -1,6 +1,6 @@
 {
   "name": "ngx-scale",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Angular directive to scale up/ down HTML elements inside a container, keeping the original aspect ratio.",
   "author": {
     "name": "Jefferson Boldrin Cardozo",
